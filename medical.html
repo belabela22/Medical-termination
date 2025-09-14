@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Termination Notice — DeLuca Hospital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Theme */
+      --red: #c0142c;
+      --pink: #ff3a76;
+      --bg-start: #7a0016; /* deep red */
+      --bg-end: #ff5f9a;   /* vibrant pink */
+      --surface: 255,255,255; /* for rgba */
+      --text: #222222;
+      --muted: #5a5f66;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 10px 30px rgba(0,0,0,0.18), 0 2px 10px rgba(0,0,0,0.08);
+
+      /* Sizing */
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --pad-lg: 28px;
+      --pad-md: 22px;
+      --pad-sm: 16px;
+
+      /* Motion */
+      --easing: cubic-bezier(.22,.61,.36,1);
+      --duration: 450ms;
+      --glow: 0 0 0 rgba(0,0,0,0);
+    }
+
+    /* Page background */
+    html, body {
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(135deg, var(--bg-start), var(--bg-end)) fixed;
+      display: grid;
+      place-items: center;
+      padding: 6vh 14px;
+    }
+
+    /* Container card */
+    .notice {
+      width: min(880px, 100%);
+      background: rgba(var(--surface), 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      backdrop-filter: saturate(120%) blur(8px);
+      overflow: clip;
+      animation: enter var(--duration) var(--easing) both;
+    }
+    @keyframes enter {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Top gradient bar */
+    .bar {
+      height: 10px;
+      background: linear-gradient(90deg, var(--red), var(--pink));
+    }
+
+    /* Header */
+    .header {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: center;
+      padding: var(--pad-lg);
+      border-bottom: 1px solid var(--border);
+    }
+    .icon-wrap {
+      width: 56px; height: 56px;
+      display: grid; place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+      border: 1px solid var(--border);
+      box-shadow: 0 6px 16px rgba(192,20,44,0.18);
+    }
+    .icon {
+      font-size: 28px;
+      line-height: 1;
+    }
+    .title {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 12px 16px;
+    }
+    .title h1 {
+      margin: 0;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+      font-size: clamp(18px, 2.8vw, 24px);
+    }
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255,58,118,0.15), rgba(192,20,44,0.15));
+      color: #8a0f24;
+      font-weight: 600;
+      font-size: 12px;
+      border: 1px solid rgba(255, 58, 118, 0.25);
+    }
+
+    /* Body */
+    .body {
+      padding: var(--pad-lg);
+      display: grid;
+      gap: 18px;
+    }
+    .to-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .to-line strong {
+      color: var(--text);
+    }
+    .section {
+      display: grid;
+      gap: 10px;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    .section p {
+      margin: 0;
+      color: #30343a;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 12px;
+      color: #7d1030;
+      background: linear-gradient(90deg, rgba(255,119,163,0.22), rgba(255,58,118,0.22));
+      border: 1px solid rgba(255, 58, 118, 0.28);
+    }
+
+    /* Dividers with subtle medical icons */
+    .divider {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted);
+      margin: 6px 0 2px;
+    }
+    .divider::before,
+    .divider::after {
+      content: "";
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(0,0,0,0.12), transparent);
+    }
+    .divider .svg {
+      display: inline-block;
+      width: 22px; height: 22px;
+      opacity: 0.7;
+    }
+
+    /* Footer */
+    .footer {
+      padding: var(--pad-lg);
+      display: grid;
+      gap: 12px;
+      border-top: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.7));
+    }
+    .sign-line {
+      display: grid;
+      gap: 4px;
+      font-weight: 500;
+    }
+    .small {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Acknowledge button */
+    .actions {
+      margin-top: 6px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      --btn-shadow: 0 10px 18px rgba(255, 58, 118, 0.28);
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #ffffff;
+      background-image: linear-gradient(90deg, var(--red), var(--pink));
+      box-shadow: var(--btn-shadow), var(--glow);
+      cursor: pointer;
+      transition: transform 180ms var(--easing), box-shadow 280ms var(--easing), filter 280ms var(--easing);
+    }
+    .btn:hover {
+      filter: saturate(110%);
+      box-shadow:
+        0 0 0 6px rgba(255, 90, 140, 0.18),
+        0 16px 24px rgba(192,20,44,0.30);
+      transform: translateY(-1px);
+    }
+    .btn:active {
+      transform: translateY(0);
+      box-shadow:
+        0 0 0 4px rgba(255, 90, 140, 0.22),
+        0 10px 18px rgba(192,20,44,0.28);
+    }
+    .btn.secondary {
+      background-image: linear-gradient(90deg, #f0f2f4, #e7eaee);
+      color: #2c2f33;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+    }
+    .btn.secondary:hover {
+      box-shadow:
+        0 0 0 6px rgba(0,0,0,0.06),
+        0 16px 24px rgba(0,0,0,0.08);
+    }
+
+    /* Responsive refinements */
+    @media (max-width: 720px) {
+      .header { padding: var(--pad-md); }
+      .body   { padding: var(--pad-md); }
+      .footer { padding: var(--pad-md); }
+      .icon-wrap { width: 52px; height: 52px; }
+    }
+    @media (max-width: 420px) {
+      .title h1 { letter-spacing: 0.06em; }
+      .to-line { font-size: 15px; }
+      .btn { width: 100%; justify-content: center; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+
+    /* High contrast outline for keyboard users */
+    .btn:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #ff7aa9;
+      outline-offset: 2px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <main class="notice" role="article" aria-labelledby="title">
+    <div class="bar" aria-hidden="true"></div>
+
+    <header class="header">
+      <div class="icon-wrap" aria-hidden="true">
+        <span class="icon" role="img" aria-label="Warning">⚠️</span>
+      </div>
+      <div class="title">
+        <h1 id="title">Termination Notice</h1>
+        <span class="badge-status" aria-label="Notice status">
+          <svg class="svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 1.333c3.68 0 6.667 2.987 6.667 6.667 0 3.68-2.987 6.667-6.667 6.667C4.32 14.667 1.333 11.68 1.333 8 1.333 4.32 4.32 1.333 8 1.333Zm0 2A4.667 4.667 0 1 0 8 12.667 4.667 4.667 0 0 0 8 3.333Zm-.667 2h1.334v3.334H7.333V5.333Zm0 4h1.334v1.334H7.333V9.333Z" fill="#c0142c"/>
+          </svg>
+          NOTICE
+        </span>
+      </div>
+    </header>
+
+    <section class="body">
+      <div class="to-line" aria-label="Recipient">
+        <strong>To:</strong> Naruna, <em>[Job Title]</em>
+      </div>
+
+      <div class="divider" aria-hidden="true">
+        <svg class="svg" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+          <path fill="#c0142c" d="M12 2l3 3-3 3-3-3 3-3Zm0 6a8 8 0 100 16 8 8 0 000-16Zm1 4v3h3v2h-3v3h-2v-3H8v-2h3v-3h2Z"/>
+        </svg>
+        <span class="small" aria-hidden="true">DeLuca Hospital</span>
+        <svg class="svg" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+          <path fill="#c0142c" d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h7v-2H5V7h14v5h2V5a2 2 0 00-2-2Zm-3 6H8v2h8V9Zm0 4H8v2h8v-2Zm5.293 2.293L18 22l-2.5-.5L15 19l5.293-5.293a1 1 0 011.414 0l1.586 1.586a1 1 0 010 1.414Z"/>
+        </svg>
+      </div>
+
+      <div class="section" aria-label="Notice content">
+        <p>Dear Naruna,</p>
+        <p>This letter serves as a formal <span class="badge" aria-label="Termination badge">Termination</span> notice from DeLuca Hospital, effective <strong>[Effective Date]</strong>. After careful review, we have determined that the requirements of the position have not been met, specifically regarding <span class="badge" aria-label="Responsibility badge">Responsibility</span> for assigned duties.</p>
+        <p>The decision follows ongoing concerns about clarity in task execution and consistent <strong>accountability</strong> for role expectations. Despite prior guidance and opportunities for improvement, these expectations have not been satisfied.</p>
+        <p>Your employment with DeLuca Hospital will end effective on the date stated above. Please return any hospital property and complete all separation procedures as instructed.</p>
+        <p>We appreciate your time with our organization and wish you well in your future endeavors.</p>
+      </div>
+
+      <div class="section small" aria-label="Effective date note">
+        <p><strong>Effective Date:</strong> [Effective Date]</p>
+        <p><strong>Position:</strong> [Job Title]</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="sign-line" aria-label="Signature">
+        <div>Signed: <strong>[Name]</strong></div>
+        <div>Chief of Nursing, DeLuca Hospital</div>
+      </div>
+      <div class="small" aria-label="HR follow up">
+        For questions regarding benefits, final pay, or exit procedures, Human Resources will contact you with next steps. If you need assistance sooner, email <a href="mailto:hr@delucahospital.org">hr@delucahospital.org</a>.
+      </div>
+
+      <div class="actions">
+        <button class="btn" type="button" aria-label="Acknowledge receipt">Acknowledge</button>
+        <button class="btn secondary" type="button" aria-label="Download PDF">Download PDF</button>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
